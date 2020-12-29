@@ -1,0 +1,38 @@
+{
+  "name": "iexcloud_googlescript",
+  "version": "1.0.0",
+  "description": "google script wrapper to access the iex cloud api",
+  "main": "index.js",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.20"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
+    "eslint": "^7.16.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "typescript": "^4.1.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KamisamaPT/iexcloud-googlescript.git"
+  },
+  "keywords": [
+    "iexcloud",
+    "googlescript",
+    "financial"
+  ],
+  "author": "Humberto Virtudes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KamisamaPT/iexcloud-googlescript/issues"
+  },
+  "homepage": "https://github.com/KamisamaPT/iexcloud-googlescript#readme"
+}
