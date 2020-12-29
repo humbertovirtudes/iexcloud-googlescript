@@ -50,6 +50,8 @@ class iexCloudAPIDividendCall extends iexCloudAPI<DividendData> {
 	}
 }
 
-function getDividendData(symbol: string): DividendData {
+// Google Sheets calls go here
+
+function IEXDIVIDENDDATA(symbol: string): DividendData {
 	return new iexCloudAPIDividendCall().getData(symbol);
 }
