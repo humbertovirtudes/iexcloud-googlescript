@@ -53,8 +53,9 @@ class iexCloudAPIDividendCall extends iexCloudAPI<DividendData> {
 // Google Sheets calls go here
 
 /**
-* Imports JSON data to your spreadsheet Ex: =GETEXCLOUDDIVIDENDDATA($A2,GOOGLEFINANCE($A2, "price"),"xxxx")
+* Imports JSON data to your spreadsheet about a symbol's dividend
 * @param {string} symbol         - your stock ticker
+* @return Dividend Data
 * @customFunction
 */
 function IEXDIVIDENDDATA(symbol: string): DividendData {
