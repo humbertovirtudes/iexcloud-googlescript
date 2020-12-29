@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
+        "baseUrl": "./src",
         "module": "commonjs",
         "esModuleInterop": true,
         "target": "es6",
         "noImplicitAny": true,
         "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
         "sourceMap": true,
         "outDir": "dist",
-        "baseUrl": ".",
         "paths": {
             "*": [
                 "node_modules/*"
@@ -16,5 +17,8 @@
     },
     "include": [
         "src/**/*"
-    ]
+    ],
+    "exclude": [
+        "node_modules"
+      ]
 }

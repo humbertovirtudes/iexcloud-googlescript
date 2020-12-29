@@ -1,4 +1,3 @@
 function runTet(): string {
-  Logger.log("Hello, world!");
-  return false;
+    Logger.log("Hello, world!");
 }
