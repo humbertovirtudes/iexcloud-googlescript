@@ -1,41 +1,9 @@
 module.exports = {
-  env: {
-    es6: true,
-    node: true,
-    commonjs: true,
+  "parserOptions": {
+    "ecmaVersion": 2017
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-  ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    files: ['*.ts', '*.tsx'],
-    project: "./tsconfig.json",
-    tsconfigRootDir: __dirname,
-  },
-  plugins: ["@typescript-eslint"],
-  rules: {
-    "@typescript-eslint/explicit-function-return-type": ["error"],
-    "@typescript-eslint/no-inferrable-types": 1,
-    "@typescript-eslint/member-ordering": 1,
-    "@typescript-eslint/no-use-before-define": 2,
-    "@typescript-eslint/no-floating-promises": "warn",
-    "@typescript-eslint/no-array-constructor": "warn",
-    "@typescript-eslint/no-var-requires": 1,
-    "@typescript-eslint/no-empty-function": "warn",
-    "@typescript-eslint/no-this-alias": "warn",
-    "@typescript-eslint/consistent-type-assertions": "warn",
-    "@typescript-eslint/ban-types": "warn",
-    "@typescript-eslint/no-namespace": "off",
-    "@typescript-eslint/quotes": 0,
-    "@typescript-eslint/semi": ["off", null],
-    "@typescript-eslint/type-annotation-spacing": 1,
-    "@typescript-eslint/no-empty-interface": "warn",
-    "@typescript-eslint/no-explicit-any": 2,
-    "@typescript-eslint/indent": 0,
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [1]
-  },
+
+  "env": {
+    "es6": true
+  }
 };
