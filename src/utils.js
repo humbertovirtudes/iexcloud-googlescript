@@ -1,7 +1,6 @@
-/** UTILS CLASS  */
 class Utils {
 
-  checkInputs(APIkey, symbl, endpoint, attribute): ?string {
+  checkInputs(APIkey, symbl, endpoint, attribute) {
     if (symbl == null || symbl === "" || attribute === "") {
       return "";
     }
@@ -17,7 +16,7 @@ class Utils {
     return null;
   }
 
-  normalizeDataObject(data): Record<string, mixed> {
+  normalizeDataObject(data) {
     for (const [key,value] of Object.entries(data)) {
       data[key] = this.normalizeValue(value);
     }
@@ -49,7 +48,7 @@ class Utils {
     return mainData;
   }
 
-  getFormattedData(data, attribute): mixed {
+  getFormattedData(data, attribute) {
     if (["string", "number", "boolean"].includes(typeof data)) {
       return data;
     }
