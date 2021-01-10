@@ -16,3 +16,5 @@ npm install
 
 * https://developers.google.com/apps-script/guides/clasp
 * https://yagisanatode.com/2019/04/01/working-with-google-apps-script-in-visual-studio-code-using-clasp/
+
+Buy me a coffee: www.buymeacoffee.com/hvirtudes
