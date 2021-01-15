@@ -2,7 +2,7 @@
 
 ## Demo Spreadsheet
 
-https://docs.google.com/spreadsheets/d/1GN9el8TYD7jIqlXVJYxBVWcf8GpW3EFuw1Sv1W0qVEI/edit#gid=0
+https://docs.google.com/spreadsheets/d/1GN9el8TYD7jIqlXVJYxBVWcf8GpW3EFuw1Sv1W0qVEI/
 
 # Contribute to development
 
