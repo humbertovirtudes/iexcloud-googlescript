@@ -1,0 +1,193 @@
+// https://material.io/resources/icons/
+<script type="text/babel">
+	const {
+		Avatar,
+		Accordion,
+		AccordionSummary,
+		AccordionDetails,
+		List,
+		ListItem,
+		ListItemText,
+		Icon,
+		IconButton,
+		Chip,
+		LinearProgress,
+		Typography,
+		makeStyles,
+		Grid,
+		Zoom,
+		Link
+	} = MaterialUI;
+
+	type DetailEntryProps = {
+		index: number,
+		title: string,
+		details: Array<string>,
+		enableCopy: boolean,
+		isExpanded: boolean,
+		setExpanded: () => void,
+	}
+
+	const useStyles = makeStyles(() => ({
+		rootDetails: {
+			width: '100%',
+		},
+	}));
+
+	function Details(): React.MixedElement {
+		const [expanded, setExpanded] = React.useState(null);
+		const [detailsConfig, setDetailsConfig] = React.useState([]);
+
+		React.useEffect(() => {
+			google.script.run
+				.withSuccessHandler((config) => setDetailsConfig(config))
+				.getDetailsConfig();
+		}, []);
+
+		return (
+			<React.Fragment>
+				{detailsConfig.length === 0 && <LinearProgress />}
+				{detailsConfig.map((entry, index) =>
+					<DetailEntry
+						index={index + 1}
+						title={entry.title}
+						details={entry.details}
+						enableCopy={entry.enableCopy | false}
+						isExpanded={expanded === entry.title}
+						setExpanded={setExpanded}
+					/>
+				)}
+			</React.Fragment>
+		);
+	}
+
+	function DetailEntry(
+		{
+			index,
+			title,
+			details,
+			enableCopy,
+			isExpanded,
+			setExpanded,
+		}: DetailEntryProps
+	): React.MixedElement {
+		const classes = useStyles();
+		const [copiedText, setCopiedText] = React.useState(null);
+		const delay = 300;
+
+		React.useEffect(() => {
+			setCopiedText(null);
+		}, [isExpanded]);
+
+		return (
+			<Zoom in={true} style={{transitionDelay: `${delay + (index * 100)}ms`}} key={index}>
+				<Accordion expanded={isExpanded} onChange={() => setExpanded(isExpanded ? null : title)}>
+					<AccordionSummary
+						expandIcon={
+							<IconButton color={isExpanded ? "primary" : "default"}>
+								<Icon>expand_more</Icon>
+							</IconButton>
+						}
+					>
+						<Chip
+							avatar={<Avatar>{index}</Avatar>}
+							label={title}
+							color={isExpanded ? "primary" : "default"}
+							variant="outlined"
+						/>
+					</AccordionSummary>
+					<AccordionDetails>
+						<Grid container spacing={2} direction="column">
+							{details.map(entry =>
+								<DetailEntryContent
+									entry={entry}
+									enableCopy={enableCopy}
+									isInClipboard={copiedText === entry}
+									setCopiedText={setCopiedText}
+								/>
+							)}
+						</Grid>
+					</AccordionDetails>
+				</Accordion >
+			</Zoom>
+		);
+	}
+
+	type DetailEntryContentProps = {
+		entry: string,
+		enableCopy: boolean,
+		isInClipboard: boolean,
+		setCopiedText: () => void,
+	}
+
+	function DetailEntryContent(
+		{
+			entry,
+			enableCopy,
+			isInClipboard,
+			setCopiedText,
+		}: DetailEntryContentProps
+	): React.MixedElement {
+		return (
+			<Grid item xs id={entry}>
+				<Grid container direction="row" justify="start" alignItems="center" wrap='nowrap'>
+					<Typography variant="body2" style={{width: '80%', wordWrap: "break-word"}}>
+						<MaybeLink entry={entry} />
+					</Typography>
+					{enableCopy
+						? <CopyButton
+							input={entry}
+							isInClipboard={isInClipboard}
+							setClipboardContent={setCopiedText}
+						/>
+						: null
+					}
+				</Grid>
+			</Grid>
+		);
+	}
+
+	function MaybeLink({entry}: {entry: string}): React.Node {
+		const urls = entry.match(/\bhttps?:\/\/\S+/gi);
+		if (urls === null) {
+			return entry;
+		}
+		return urls.map(url => <Link href="#" href={url} target="_blank" >{url}</Link>);
+	}
+
+	type CopyButtonProps = {
+		text: input,
+		isInClipboard: boolean,
+		setClipboardContent: () => void
+	}
+
+	function CopyButton({input, isInClipboard, setClipboardContent}: CopyButtonProps): React.MixedElement {
+		const copyToClipboard = (text) => {
+			const el = document.createElement('textarea');
+			el.value = text;
+			el.setAttribute('readonly', '');
+			el.style = {position: 'absolute', left: '-9999px'};
+			document.body.appendChild(el);
+			el.select();
+			document.execCommand('copy');
+			document.body.removeChild(el);
+			setClipboardContent(text);
+		};
+
+		return (
+			<Tooltip title={isInClipboard ? 'Copied!' : 'Click to copy'}>
+				<IconButton onClick={() => copyToClipboard(input)}>
+					<CustomClipboardIcon condition={isInClipboard} iconImg="done" />
+					<CustomClipboardIcon condition={!isInClipboard} iconImg="content_copy" />
+				</IconButton>
+			</Tooltip>
+		);
+	}
+
+	function CustomClipboardIcon({condition, iconImg}: {condition: boolean, iconImg: string}): React.MixedElement {
+		return condition &&
+			<Zoom in={condition} style={{transitionDelay: condition ? '200ms' : '0ms'}}>
+				<Icon fontSize="small">{iconImg}</Icon>
+			</Zoom>;
+	}
+</script>

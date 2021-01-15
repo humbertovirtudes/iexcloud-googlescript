@@ -1,3 +1,4 @@
+/** UTILS CLASS  */
 class Utils {
 
   checkInputs(APIkey, symbl, endpoint, attribute) {

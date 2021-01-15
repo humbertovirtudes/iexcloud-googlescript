@@ -1,3 +1,4 @@
+/** Pulls detailed stock info from the IEX API https://iexcloud.io/docs/api/ */
 class IEXFinanceAPI {
 
   constructor(APIkey) {
@@ -30,6 +31,7 @@ class IEXFinanceAPI {
       dividends: "dividends",
       fundamentals: "fundamentals",
       logo: "logo",
+      news: "news",
       quote: "quote",
       recommendationtrends: "recommendation-trends",
       splits: "splits",

@@ -1,0 +1,84 @@
+<script type="text/babel">
+	const {
+		Typography,
+		CardMedia,
+		CardContent,
+		CardActionArea,
+		Card,
+		CardHeader,
+		Avatar,
+		makeStyles,
+		LinearProgress,
+		CircularProgress,
+		Grid,
+		Zoom
+	} = MaterialUI;
+
+	const useStyles = makeStyles({
+		rootCard: {
+			marginTop: 8,
+		},
+	});
+
+	function HelpCard(): React.MixedElement {
+		const [email, setEmail] = React.useState(null);
+		const [coverImg, setCoverImg] = React.useState(null);
+		const [title, setCardTitle] = React.useState(null);
+		const classes = useStyles();
+
+		const event = new Date(Date.now());
+		const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+
+		React.useEffect(() => {
+			google.script.run
+				.withSuccessHandler((email) => setEmail(email))
+				.getCurrentUserEmail();
+
+			google.script.run
+				.withSuccessHandler((link) => setCoverImg(link))
+				.getCoverImageLink();
+
+			google.script.run
+				.withSuccessHandler((title) => setCardTitle(title))
+				.getCardTitle();
+		}, []);
+
+		return (
+			<Card className={classes.rootCard}>
+				<CardHeader
+					avatar={
+						email === null
+							? <CircularProgress color="secondary" />
+							: <Avatar style={{backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16)}}>
+								{email.charAt(0).toUpperCase()}
+							</Avatar>
+					}
+					title={email === null ? <LinearProgress color="secondary" /> : email}
+					subheader={event.toLocaleDateString(undefined, options)}
+				/>
+				<Zoom in={coverImg !== null} style={{transitionDelay: coverImg !== null ? '300ms' : '0ms'}}>
+					{coverImg !== null
+						? <CardMedia
+							component="img"
+							alt="Header"
+							height="140"
+							image={coverImg}
+							title="Stonks"
+						/>
+						: <Grid container justify="center">
+							<CircularProgress color="secondary" />
+						</Grid>
+					}
+				</Zoom>
+				<CardActionArea>
+					<CardContent>
+						<Typography gutterBottom variant="h6" component="p" align="center" color="textPrimary" >
+							{title}
+						</Typography>
+					</CardContent>
+				</CardActionArea>
+				<Details />
+			</Card>
+		);
+	}
+</script>

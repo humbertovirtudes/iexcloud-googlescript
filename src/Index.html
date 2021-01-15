@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<base target="_top">
+	<!-- React Imports -->
+	<script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+	<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@latest/babel.min.js" crossorigin="anonymous"></script>
+	<!-- Material UI Imports -->
+	<script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js"></script>
+	<!-- Fonts to support Material Design -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+	<!-- Icons to support Material Design -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<script type="text/javascript" src="https://unpkg.com/@material-ui/lab@4.0.0-alpha.57/index.js"></script>
+</head>
+
+<body id="root">
+	<?!= include('details.js'); ?>
+	<?!= include('helpcard.js'); ?>
+	<?!= include('button.js'); ?>
+	<?!= include('App.js'); ?>
+	<script type="text/babel">
+		ReactDOM.render(
+			<App />,
+			document.getElementById('root')
+		);
+	</script>
+</body>
+
+</html>

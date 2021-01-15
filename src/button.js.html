@@ -1,0 +1,40 @@
+<script type="text/babel">
+	const {Button, ButtonGroup, makeStyles, Icon, Tooltip, Zoom} = MaterialUI;
+
+	type AppButtonGroupProps = {
+		buttons: Array<{label: string, url: string, icon?: string, tooltip?: string}>,
+		color: string,
+	}
+
+	const useStyles = makeStyles({
+		rootButtonGroup: {
+			textAlign: 'center',
+			marginBottom: 8,
+			marginTop: 8,
+		},
+	});
+
+	function AppButtonGroup({buttons, color}: AppButtonGroupProps): React.MixedElement {
+		const classes = useStyles();
+		const delay = 300;
+
+		return (
+			<ButtonGroup variant="contained" color={color} className={classes.rootButtonGroup} size="small" fullWidth={true}>
+				{buttons.map((button, index) => (
+					<Zoom in={true} style={{transitionDelay: `${delay + ((index + 1) * 100)}ms`}} key={index}>
+						<Tooltip title={button.tooltip}>
+							<Button
+								href={button.url}
+								target="_blank"
+								startIcon={button.icon ? <Icon style={{fontSize: 30}}>{button.icon}</Icon> : null}
+							>
+								{button.label}
+							</Button>
+						</ Tooltip>
+					</Zoom >
+				)
+				)}
+			</ButtonGroup>
+		);
+	}
+</script>

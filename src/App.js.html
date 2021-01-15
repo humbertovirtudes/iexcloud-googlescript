@@ -1,0 +1,30 @@
+<script type="text/babel">
+	const {
+		Grid,
+		LinearProgress,
+	} = MaterialUI;
+
+	function App(): React.MixedElement {
+		const [loaded, setLoaded] = React.useState(false);
+		const [buttonsConfig, setButtonsConfig] = React.useState({header: [], footer: []});
+
+		React.useEffect(() => {
+			google.script.run
+				.withSuccessHandler((config) => {
+					setButtonsConfig(config);
+					setLoaded(true);
+				})
+				.getButtonsConfig();
+		}, []);
+
+		return (
+			<Grid>
+				{!loaded && <LinearProgress />}
+				<AppButtonGroup color="primary" buttons={buttonsConfig.header} />
+				<HelpCard />
+				<AppButtonGroup color="secondary" buttons={buttonsConfig.footer} />
+				{!loaded && <LinearProgress color="secondary" />}
+			</ Grid>
+		);
+	}
+</script>
