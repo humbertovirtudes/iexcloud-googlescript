@@ -1,6 +1,6 @@
 # iexcloud-googlescript
 
-![Function Helper](/Function Helper.PNG)
+![Function Helper](https://github.com/KamisamaPT/iexcloud-googlescript/blob/main/Function%20Helper.PNG)
 
 ## Demo Spreadsheet
 
