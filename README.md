@@ -1,6 +1,6 @@
 # iexcloud-googlescript
 
-![GitHub Logo](/Function Helper.png)
+![Function Helper](/Function Helper.PNG)
 
 ## Demo Spreadsheet
 
